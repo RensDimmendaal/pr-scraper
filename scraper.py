@@ -13,7 +13,7 @@ if __name__ == "__main__":
     fpath = Path("pullrequests.jsonl")
     ids = [json.loads(line)['id'] for line in fpath.read_text().splitlines()]
     
-    with urlopen("https://api.github.com/orgs/{your_organization}/members") as response:
+    with urlopen(f"https://api.github.com/orgs/{your_organization}/members") as response:
         org_members = json.loads(response.read())
 
     for member in org_members:
