@@ -1,3 +1,4 @@
+from time import sleep
 from urllib.request import urlopen
 import json
 from pathlib import Path
@@ -11,6 +12,7 @@ with urlopen(f"https://api.github.com/orgs/{your_organization}/members") as resp
     org_members = json.loads(response.read())
 
 for member in org_members:
+    sleep(6)  # rate limit of 10 per minute
     with urlopen(f"https://api.github.com/search/issues?q=state%3Aclosed+type%3Apr+author%3A{member['login']}") as response:
         user_body = json.loads(response.read())
     closed_prs =  user_body.get("items")
